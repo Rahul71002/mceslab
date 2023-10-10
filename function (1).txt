@@ -29,52 +29,52 @@ int main()
 		}
 		else if(!SW3)
 		{
-		reset_values(1);
-		IO0SET = 0xFF<<16;
-		IO0CLR = ((contDN/10)<<4 | (contDN%10)) << 16;
-		contDN--;
-		if(contDN < 0) contDN = 99;
-}
-else if(!SW4)
-{
-reset_values(2);
-IO0SET = 0xFF<<16;
-IO0CLR = leftSFT<<16;
-leftSFT<<=1;
-if(leftSFT > 1U<<7) leftSFT = 1;
-}
-else if(!SW5)
-{
-reset_values(3);
-IO0SET = 0xFF<<16;
-IO0CLR = rightSFT<<16;
-rightSFT>>=1;
-if(rightSFT < 1) rightSFT = 1U<<7;
-}
-delay_ms(300);
-}
+			reset_values(1);
+			IO0SET = 0xFF<<16;
+			IO0CLR = ((contDN/10)<<4 | (contDN%10)) << 16;
+			contDN--;
+			if(contDN < 0) contDN = 99;
+		}
+		else if(!SW4)
+		{
+			reset_values(2);
+			IO0SET = 0xFF<<16;
+			IO0CLR = leftSFT<<16;
+			leftSFT<<=1;
+			if(leftSFT > 1U<<7) leftSFT = 1;
+		}
+		else if(!SW5)
+		{
+			reset_values(3);
+			IO0SET = 0xFF<<16;
+			IO0CLR = rightSFT<<16;
+			rightSFT>>=1;
+			if(rightSFT < 1) rightSFT = 1U<<7;
+		}
+		delay_ms(300);
+	}
 }
 void reset_values(int y)
 {
-switch(y)
-{
-case 0: contDN = 99;
-rightSFT = 1U<<7;
-leftSFT = 1;
-break;
-case 1: contUP = 0;
-rightSFT = 1U<<7;
-leftSFT = 1;
-break;
-case 2: contUP = 0;
-contDN = 99;
-rightSFT = 1U<<7;
-break;
-case 3: contUP = 0;
-contDN = 99;
-leftSFT = 1;
-break;
-}
+	switch(y)
+	{
+		case 0: contDN = 99;
+			rightSFT = 1U<<7;
+			leftSFT = 1;
+			break;
+		case 1: contUP = 0;
+			rightSFT = 1U<<7;
+			leftSFT = 1;
+			break;
+		case 2: contUP = 0;
+			contDN = 99;
+			rightSFT = 1U<<7;
+			break;
+		case 3: contUP = 0;
+			contDN = 99;
+			leftSFT = 1;
+			break;
+	}
 }
 void delay_ms(unsigned int ms) {
 for(int i = 0; i < ms; i++) {
